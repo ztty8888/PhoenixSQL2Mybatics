@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="addFetchCategory" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="addFetchCategory"/>
+        <property name="operaType" value="upsert"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value=""/>
+        <property name="sql">
+            <value>
+                <![CDATA[
+			 upsert into dtc.fetch_category (
+			     id,
+			     name ,
+				 url  ,
+				 refUrl,
+				 platformId  ,
+				 code  ,
+				 parentCode  ,
+				 level  ,
+				 priority  ,
+				 descs  ,
+				 status,
+				 crawlType,
+				 gmtCreated ,
+				 gmtModified ,
+				 areaName
+			  )
+			  
+			  values
+			  
+			  ( ?, ?, ?, ?, ?, ?, ?, ?, ? , ? ,?,? ,?,? , ?)
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			       id,
+			     name ,
+				 url  ,
+				 refUrl,
+				 platformId  ,
+				 code  ,
+				 parentCode  ,
+				 level  ,
+				 priority  ,
+				 descs  ,
+				 status,
+				 crawlType,
+				 gmtCreated ,
+				 gmtModified ,
+				 areaName
+			]]>
+            </value>
+        </property>
+
+    </bean>
+
+
+    <bean id="getFetchCategoryById" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategoryById"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="com.xghl.dtc.zeuscommon.bean.FetchCategory"/>
+        <property name="selectUseId" value="true"/>
+        <property name="useAreaNameForSingleSQL" value="false"/>
+
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			select
+			      id,
+			     name ,
+				 url  ,
+				 refUrl,
+				 platformId  ,
+				 code  ,
+				 parentCode  ,
+				 level  ,
+				 priority  ,
+				 descs  ,
+				 status,
+				 crawlType,
+				 gmtCreated ,
+				 gmtModified,
+				 areaName
+				 from dtc.fetch_category  where id = ?  limit 1
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			 id
+			]]>
+            </value>
+        </property>
+
+
+        <!--   代表hbase数据库中的key , value是你返回的bean 的属性名称 -->
+        <property name="resultClassMapping">
+            <map>
+                <entry key="ID" value="id:string"/>
+                <entry key="NAME" value="name:string"/>
+                <entry key="URL" value="url:string"/>
+                <entry key="REFURL" value="refUrl:string"/>
+                <entry key="PLATFORMID" value="platformId:string"/>
+                <entry key="CODE" value="code:string"/>
+                <entry key="PARENTCODE" value="parentCode:string"/>
+                <entry key="LEVEL" value="level:int"/>
+                <entry key="PRIORITY" value="priority:int"/>
+                <entry key="DESCS" value="descs:string"/>
+                <entry key="STATUS" value="status:int"/>
+                <entry key="CRAWLTYPE" value="crawlType:string"/>
+                <entry key="GMTMODIFIED" value="gmtModified:java.util.date"/>
+                <entry key="GMTCREATED" value="gmtCreated:java.util.date"/>
+                  <entry key="AREANAME" value="areaName:string"/>
+            </map>
+        </property>
+
+    </bean>
+
+
+    <bean id="getFetchCategoryByCode" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategoryByCode"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="com.xghl.dtc.zeuscommon.bean.FetchCategory"/>
+        <property name="selectUseId" value="true"/>
+        <property name="useAreaNameForSingleSQL" value="false"/>
+        <property name="sql">
+            <value>
+                <![CDATA[
+			select
+			      id,
+			     name ,
+				 url  ,
+				 refUrl,
+				 platformId  ,
+				 code  ,
+				 parentCode  ,
+				 level  ,
+				 priority  ,
+				 descs  ,
+				 status,
+				 crawlType,
+				 gmtCreated ,
+				 gmtModified,
+				 areaName
+				 from dtc.fetch_category  where code = ?  limit 1
+
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			 code
+			]]>
+            </value>
+        </property>
+
+        <!--   代表hbase数据库中的key , value是你返回的bean 的属性名称 -->
+        <property name="resultClassMapping">
+            <map>
+                <entry key="ID" value="id:string"/>
+                <entry key="NAME" value="name:string"/>
+                <entry key="URL" value="url:string"/>
+                <entry key="REFURL" value="refUrl:string"/>
+                <entry key="PLATFORMID" value="platformId:string"/>
+                <entry key="CODE" value="code:string"/>
+                <entry key="PARENTCODE" value="parentCode:string"/>
+                <entry key="LEVEL" value="level:int"/>
+                <entry key="PRIORITY" value="priority:int"/>
+                <entry key="DESCS" value="descs:string"/>
+                <entry key="STATUS" value="status:int"/>
+                <entry key="CRAWLTYPE" value="crawlType:string"/>
+                <entry key="GMTMODIFIED" value="gmtModified:java.util.date"/>
+                <entry key="GMTCREATED" value="gmtCreated:java.util.date"/>
+                <entry key="AREANAME" value="areaName:string"/>
+            </map>
+        </property>
+
+    </bean>
+
+
+    <bean id="getFetchCategoryByStatus" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategoryByStatus"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="com.xghl.dtc.zeuscommon.bean.FetchCategory"/>
+        <property name="selectUseId" value="false"/>
+        <property name="useAreaNameForSingleSQL" value="true"/>
+
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			select
+			      id,
+			     name ,
+				 url  ,
+				 refUrl,
+				 platformId  ,
+				 code  ,
+				 parentCode  ,
+				 level  ,
+				 priority  ,
+				 descs  ,
+				 status,
+				 crawlType,
+				 gmtCreated ,
+				 gmtModified,
+				 areaName
+				 from dtc.fetch_category  where    status  <= ? order by gmtModified limit ?
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			 status,limitCount
+			]]>
+            </value>
+        </property>
+
+
+        <!--   代表hbase数据库中的key , value是你返回的bean 的属性名称 -->
+        <property name="resultClassMapping">
+            <map>
+                <entry key="ID" value="id:string"/>
+                <entry key="NAME" value="name:string"/>
+                <entry key="URL" value="url:string"/>
+                <entry key="REFURL" value="refUrl:string"/>
+                <entry key="PLATFORMID" value="platformId:string"/>
+                <entry key="CODE" value="code:string"/>
+                <entry key="PARENTCODE" value="parentCode:string"/>
+                <entry key="LEVEL" value="level:int"/>
+                <entry key="PRIORITY" value="priority:int"/>
+                <entry key="DESCS" value="descs:string"/>
+                <entry key="STATUS" value="status:int"/>
+                <entry key="CRAWLTYPE" value="crawlType:string"/>
+                <entry key="GMTMODIFIED" value="gmtModified:java.util.date"/>
+                <entry key="GMTCREATED" value="gmtCreated:java.util.date"/>
+                  <entry key="AREANAME" value="areaName:string"/>
+            </map>
+        </property>
+
+    </bean>
+
+
+    <bean id="getAllFetchCategory" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getAllFetchCategory"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="false"/>
+        <property name="resultClass" value="com.xghl.dtc.zeuscommon.bean.FetchCategory"/>
+        <property name="selectUseId" value="false"/>
+        <property name="useAreaNameForSingleSQL" value="true"/>
+
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			select
+			      id,
+			     name ,
+				 url  ,
+			
+				 platformId  ,
+				 code  ,
+				 parentCode  ,
+				 level  ,
+			
+			
+			
+			
+				 areaName
+				 from dtc.fetch_category   
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+		
+			]]>
+            </value>
+        </property>
+
+
+        <!--   代表hbase数据库中的key , value是你返回的bean 的属性名称 -->
+        <property name="resultClassMapping">
+            <map>
+                <entry key="ID" value="id:string"/>
+                <entry key="NAME" value="name:string"/>
+                <entry key="URL" value="url:string"/>
+           
+                <entry key="PLATFORMID" value="platformId:string"/>
+                <entry key="CODE" value="code:string"/>
+                <entry key="PARENTCODE" value="parentCode:string"/>
+                <entry key="LEVEL" value="level:int"/>
+            
+              
+             
+              
+                <entry key="AREANAME" value="areaName:string"/>
+            </map>
+        </property>
+
+    </bean>
+
+
+    <bean id="updateCategoryPageStatus" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="updateCategoryPageStatus"/>
+        <property name="operaType" value="upsert"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value=""/>
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			 upsert into dtc.fetch_category (
+			     id,
+				 status,
+				 gmtModified   
+			  )
+			  values
+			  ( ?, ? , ? )
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			id,
+			status ,
+			 gmtModified  
+			]]>
+            </value>
+        </property>
+
+    </bean>
+
+    <bean id="batchUpdateFetchCategoryStatus" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="batchUpdateFetchCategoryStatus"/>
+        <property name="operaType" value="upsert"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value=""/>
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			 upsert into dtc.fetch_category (
+			     id,
+				 status,
+				 gmtModified
+			  )
+			  
+			  values
+			  
+			  ( ?, ?, ? )
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			id,
+			status,
+			 gmtModified   
+			]]>
+            </value>
+        </property>
+
+    </bean>
+
+
+    <bean id="getFetchCategorysCountById" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategorysCountById"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="java.lang.Long"/>
+        <property name="selectUseId" value="true"/>
+        <property name="useAreaNameForSingleSQL" value="false"/>
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			
+				select 
+				  count(id)
+				 from dtc.fetch_category  where id = ? limit 1
+			 
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			  id
+			]]>
+            </value>
+        </property>
+        <property name="resultClassMapping">
+            <map>
+                <entry key="COUNT" value="count:int"/>
+            </map>
+        </property>
+
+    </bean>
+
+    <bean id="updateFetchCategoryByScanTime" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="updateFetchCategoryByScanTime"/>
+        <property name="operaType" value="upsert"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value=""/>
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			 upsert into dtc.fetch_category (
+				   id,
+				 scanTime,
+				 status,
+				 gmtModified
+			  )
+			  values
+			  (  ? ,? ,?,?)
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+                	id,
+			   	 scanTime,
+				 status,
+				 gmtModified
+			]]>
+            </value>
+        </property>
+    </bean>
+    
+    
+    <bean id="getFetchCategoryByScanTimeAndStatus" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategoryByScanTimeAndStatus"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="java.lang.Long"/>
+        <property name="selectUseId" value="false"/>
+        <property name="useAreaNameForSingleSQL" value="true"/>
+
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			select
+			       	  count(id)
+				 from dtc.fetch_category where scanTime = ? and status = ? limit 1
+
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			 scanTime,status
+			]]>
+            </value>
+        </property>
+
+        <property name="resultClassMapping">
+            <map>
+                <entry key="COUNT" value="count:int"/>
+            </map>
+        </property>
+
+    </bean>
+    <bean id="getFetchCategoryByScanTime" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategoryByScanTime"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="com.xghl.dtc.zeuscommon.bean.FetchCategory"/>
+        <property name="selectUseId" value="false"/>
+        <property name="useAreaNameForSingleSQL" value="true"/>
+
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			select
+			      id,
+				 status,
+				 areaName
+				 from dtc.fetch_category where scanTime is null or scanTime <  ?  and  status < 10000  limit 10000
+
+			]]>
+            </value>
+        </property>
+
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			 scanTime
+			]]>
+            </value>
+        </property>
+
+
+        <!--   代表hbase数据库中的key , value是你返回的bean 的属性名称 -->
+        <property name="resultClassMapping">
+            <map>
+                <entry key="ID" value="id:string"/>
+                <entry key="STATUS" value="status:int"/>
+                <entry key="AREANAME" value="areaName:string"/>
+            </map>
+        </property>
+
+    </bean>
+
+    <bean id="getFetchCategoryByModified" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="getFetchCategoryByModified"/>
+        <property name="operaType" value="select"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value="com.xghl.dtc.zeuscommon.bean.FetchCategory"/>
+        <property name="selectUseId" value="true"/>
+        <property name="useAreaNameForSingleSQL" value="true"/>
+
+        <property name="sql">
+            <value>
+                <![CDATA[
+			 select
+			     id,
+			     gmtModified
+				 from dtc.fetch_category where  status = 50  order by id  limit 10000 offset ?
+			]]>
+            </value>
+        </property>
+
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			 limitnumber
+			]]>
+            </value>
+        </property>
+        <property name="resultClassMapping">
+            <map>
+                <entry key="ID" value="id:string"/>
+                <entry key="GMTMODIFIED" value="gmtModified:java.util.date"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean id="updateFetchCategoryStatusByModified" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixSQLOperation">
+        <property name="key" value="updateFetchCategoryStatusByModified"/>
+        <property name="operaType" value="upsert"/>
+        <property name="hasParameter" value="true"/>
+        <property name="resultClass" value=""/>
+        <property name="sql">
+            <value>
+                <![CDATA[
+			 upsert into dtc.fetch_category(
+			     id,
+				 status,
+				 gmtModified
+			  )
+			  values
+
+			  ( ?, ? ,? )
+
+			]]>
+            </value>
+        </property>
+        <property name="parameters">
+            <value>
+                <![CDATA[
+			      id,
+				 status,
+				 gmtModified
+			]]>
+            </value>
+        </property>
+    </bean>
+
+    <bean id="fetchCategoryDAO"
+          class="com.xghl.dtc.zeusthunder.db.hbase.dao.impl.FetchCategoryDAOImpl"
+          init-method="init">
+        <property name="phoenixConnectionManager" ref="phoenixConnectionManager"/>
+        <property name="tableName" value="dtc.fetch_category"/>
+         <property name="areaName" value="${areaName}"/>
+        <property name="useAreaName" value="${useAreaName}"/>
+         <property name="tableHasAreaNameColumn" value="true"/>
+        <property  name="objectPool" ref="objectPool" />
+        <property name="sqlList">
+            <list>
+                <ref bean="addFetchCategory"/>
+                <ref bean="getFetchCategoryById"/>
+                <ref bean="getFetchCategoryByStatus"/>
+                <ref bean="updateCategoryPageStatus"/>
+                <ref bean="batchUpdateFetchCategoryStatus"/>
+                <ref bean="getAllFetchCategory"/>
+                <ref bean="getFetchCategoryByScanTime"/>
+                <ref bean="getFetchCategoryByScanTimeAndStatus"/>
+                <ref bean="updateFetchCategoryByScanTime"/>
+                <ref bean="getFetchCategorysCountById"/>
+                <ref bean="getFetchCategoryByCode"/>
+                <ref bean="getFetchCategoryByModified"/>
+                <ref bean="updateFetchCategoryStatusByModified"/>
+            </list>
+        </property>
+    </bean>
+</beans>

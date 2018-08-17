@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+
+    <!-- 连接池，管理器，客户端代理 -->
+    <!-- phoenix连接池配置 -->
+    <!-- phoenix连接管理配置 -->
+    <bean id="poolFactoryBean" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixPoolableObjectFactory">
+        <!-- phoenix connection config -->
+        <property name="jdbcUrl" value="${phoenix.jdbcUrl}"/>
+        <property name="validateTimeout" value="${phoenix.validateTimeout}"/>
+        <property name="tenantId" value="${phoenix.tenantId}"/>
+        <property name="mutateMaxSize" value="${phoenix.mutateMaxSize}"/>
+        <property name="mutateBatchSize" value="${phoenix.mutateBatchSize}"/>
+        <!-- 
+          <property name="hbaseConfFile" value="${phoenix.hbaseConfFile"/>
+         -->
+      
+    </bean>
+
+    <bean id="connectionPoolBean" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixConnectionPoolImpl">
+        <property name="poolFactory" ref="poolFactoryBean"/>
+        <!-- pool config -->
+        <property name="maxActive" value="${phoenix.pool.maxActive}"/>
+        <property name="maxIdle" value="${phoenix.pool.maxIdle}"/>
+        <property name="minIdle" value="${phoenix.pool.minIdle}"/>
+        <property name="maxWait" value="${phoenix.pool.maxWait}"/>
+        <property name="testOnBorrow" value="${phoenix.pool.testOnBorrow}"/>
+        <property name="testOnReturn" value="${phoenix.pool.testOnReturn}"/>
+        <property name="testWhileIdle" value="${phoenix.pool.testWhileIdle}"/>
+    </bean>
+
+
+    <!-- phoenix连接管理配置 -->
+    <bean id="phoenixConnectionManager" class="com.xghl.dtc.zeusthunder.phoenix.PhoenixConnectionManager">
+        <property name="connectionPoolBean" ref="connectionPoolBean"/>
+    </bean>
+
+    <import resource="phoenixMapper/ItemShop.xml"/>
+    <import resource="phoenixMapper/TransactionHistory.xml"/>
+    <import resource="phoenixMapper/ItemDetail.xml"/>
+    <import resource="phoenixMapper/CategoryItems.xml"/>
+    
+</beans>
